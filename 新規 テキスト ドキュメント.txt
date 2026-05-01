@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>鈴</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #FAFAFA;
+      color: #333;
+    }
+
+    .center {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+    }
+
+    .hidden { display: none; }
+
+    .home {
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #eee;
+      padding: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #999;
+    }
+
+    .letter {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .box {
+      background: white;
+      border: 1px solid #eee;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- スタート画面 -->
+<div id="start" class="center">
+  <h1>鈴</h1>
+  <p>静かにしています</p>
+  <button onclick="start()">はじめる</button>
+</div>
+
+<!-- ホーム -->
+<div id="home" class="home hidden">
+  <h2>届いた手紙</h2>
+
+  <div class="card" onclick="openLetter('夜の帰り道','今日は空が少しだけ明るかった。','孤独 / 夜')">
+    夜の帰り道
+    <div class="small">孤独 / 夜</div>
+  </div>
+
+  <div class="card" onclick="openLetter('コンビニの光','なぜか少し安心した。','安心 / 日常')">
+    コンビニの光
+    <div class="small">安心 / 日常</div>
+  </div>
+</div>
+
+<!-- 手紙画面 -->
+<div id="letter" class="letter hidden">
+  <div class="box">
+    <h3 id="title"></h3>
+    <p id="content"></p>
+    <p class="small" id="tags"></p>
+
+    <button onclick="back()">戻る</button>
+  </div>
+</div>
+
+<script>
+function start() {
+  const audio = new Audio('https://actions.google.com/sounds/v1/alarms/soft_bell_ring.ogg');
+  audio.volume = 0.3;
+  audio.play();
+
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+}
+
+function openLetter(title, content, tags) {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("letter").classList.remove("hidden");
+
+  document.getElementById("title").innerText = title;
+  document.getElementById("content").innerText = content;
+  document.getElementById("tags").innerText = tags;
+
+  const audio = new Audio('https://actions.google.com/sounds/v1/alarms/soft_bell_ring.ogg');
+  audio.volume = 0.2;
+  audio.play();
+}
+
+function back() {
+  document.getElementById("letter").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
+
+
+
